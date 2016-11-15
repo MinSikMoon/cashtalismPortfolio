@@ -50,7 +50,7 @@
 		//System.out.println("in");
 
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		conn = DriverManager.getConnection("jdbc:mysql://localhost/studydb", "study", "study");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost/studydb", "[dbid]", "[dbpassword]");
 		stmt = conn.createStatement();
 		rs = stmt.executeQuery(query);
 
