@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>이미지 지도에 마커 표시하기</title>
+<script src = "http://code.jquery.com/jquery.min.js"></script>
+<script>
+ 	function getQueryString(paramName){
+
+ 		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+ 				
+ 		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+ 		
+ 		for(var i = 0; _tempArray.length; i++) {
+ 			var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+ 			
+ 			if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+ 				// _keyValuePair[1] : 파라미터 값
+ 				return parseFloat(_keyValuePair[1]);
+ 			}
+ 		}
+ 	}
+</script>
+
+
+</head>
+<body>
+
+	<!-- 이미지 지도를 표시할 div 입니다 -->
+	<div id="staticMap" style="width: 600px; height: 350px;"></div>
+	<h1>asdf</h1>
+
+	<script type="text/javascript"
+		src="//apis.daum.net/maps/maps3.js?apikey=[api키]"></script>
+	<script>
+// 이미지 지도에서 마커가 표시될 위치입니다 
+var markerPosition  = new daum.maps.LatLng(getQueryString('lat'),getQueryString('lng')); 
+
+// 이미지 지도에 표시할 마커입니다
+// 이미지 지도에 표시할 마커는 Object 형태입니다
+var marker = {
+    position: markerPosition
+};
+
+var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
+    staticMapOption = { 
+        center: new daum.maps.LatLng(getQueryString('lat'),getQueryString('lng')), // 이미지 지도의 중심좌표
+        level: 3, // 이미지 지도의 확대 레벨
+        marker: marker // 이미지 지도에 표시할 마커 
+    };    
+
+// 이미지 지도를 생성합니다
+var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+</script>
+<!-- //여기서 스크립팅 된 얘를 한번 토스시켜보자. -->
+<script>
+	var reUrl = $("img").attr('src');
+	//window.location.replace(reUrl);
+	//alert($("img").attr('src'));
+	$('h1').text(reUrl);
+	//document.innerHTML = reUrl;
+</script>
+
+
+</body>
+</html>
