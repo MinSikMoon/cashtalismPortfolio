@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+		
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <!-- datasource 등록 -->
+    <bean id = "dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource"
+        destroy-method="close">
+        <property name = "driverClass" value = "com.mysql.jdbc.Driver"></property>
+        <property name = "jdbcUrl" value = "[dburl]" ></property>
+        <property name = "user" value = "[유저id]"></property>
+        <property name = "password" value = "[비번]"></property>
+    </bean>
+    
+	<!-- coordDao 등록 -->
+	<bean id = "coordDao" class = "cashtalism.dao.CoordDao">
+	    <constructor-arg ref = "dataSource"></constructor-arg> <!-- dataSource 삽입ok -->
+	</bean>	
+	<!-- memberDao 등록 -->
+	<bean id = "memberDao" class = "cashtalism.dao.MemberDao">
+	    <constructor-arg ref = "dataSource"></constructor-arg> <!-- dataSource 삽입ok -->
+	</bean>	
+	
+	<!-- transactionManager 등록 -->
+	<bean id = "transactionManager"
+	    class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref = "dataSource"></property>
+	</bean>
+    
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- coordController 생성과 동시에 coordDao삽입 -->
+	<bean class="cashtalism.controller.CoordController">
+	    <constructor-arg ref = "coordDao"></constructor-arg><!-- coordDao 주입  -->
+	</bean>
+	
+	<bean class="cashtalism.controller.MemberController">
+	    <constructor-arg ref = "memberDao"></constructor-arg><!-- memberDao 주입  -->
+	</bean>
+	
+	
+	
+</beans>
+
+
+
+
+
